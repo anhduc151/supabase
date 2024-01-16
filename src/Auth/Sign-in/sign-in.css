@@ -188,8 +188,49 @@
 .item:nth-child(6):after {
   color: #ffda77;
 }
-
 /* end css loader */
+
+.sign_in_right_p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sign_in_right_p span {
+  padding: 0 10px;
+}
+
+.sign_in_op {
+  padding: 6px 10px;
+  height: 70px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 0px rgba(165, 153, 153, 0.5);
+  position: relative;
+}
+
+.sign_in_op:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+}
+
+.sign_in_continue {
+  text-align: center;
+  padding: 0 0 20px;
+}
+
+.sign_in_op_github_imgs {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  position: absolute;
+  top: 15px;
+}
+
+.sign_in_op_p {
+  text-align: center;
+  position: relative;
+  bottom: -16px;
+  font-weight: bold;
+}
 
 @media screen and (max-width: 768px) {
   .loop {

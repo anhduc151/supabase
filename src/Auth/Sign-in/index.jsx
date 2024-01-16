@@ -2,6 +2,9 @@ import React from "react";
 import "./sign-in.css";
 import { Button, Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
+import { supabase } from "../../lib/helper/supabaseClient";
+import githubimg from "../../assets/github_icons.png";
+// import { supabase } from "../../lib/helper/supabaseClient";
 
 const SignIn = () => {
   const onFinish = (values) => {
@@ -9,6 +12,13 @@ const SignIn = () => {
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const login = async () => {
+    // syntax login with github
+    await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
   };
   return (
     <div className="sign_in">
@@ -58,6 +68,13 @@ const SignIn = () => {
             <Input.Password />
           </Form.Item>
 
+          <p className="sign_in_right_p">
+            Don't have account?{" "}
+            <span>
+              <Link to="/sign-up">Register now</Link>
+            </span>
+          </p>
+
           <Form.Item>
             <div className="submit_btn">
               <Button type="primary" htmlType="submit">
@@ -66,20 +83,25 @@ const SignIn = () => {
             </div>
           </Form.Item>
         </Form>
-      </div>
 
-      <div className="sign_in_left">
-          
-      </div>
+        <p className="sign_in_continue">Or Continue With</p>
 
-        <div className="loop cubes">
-          <div className="item cubes"></div>
-          <div className="item cubes"></div>
-          <div className="item cubes"></div>
-          <div className="item cubes"></div>
-          <div className="item cubes"></div>
-          <div className="item cubes"></div>
+        <div className="sign_in_op" onClick={login}>
+          <img src={githubimg} alt="" className="sign_in_op_github_imgs" />
+          <p className="sign_in_op_p">Sign in with Github</p>
         </div>
+      </div>
+
+      <div className="sign_in_left"></div>
+
+      {/* <div className="loop cubes">
+          <div className="item cubes"></div>
+          <div className="item cubes"></div>
+          <div className="item cubes"></div>
+          <div className="item cubes"></div>
+          <div className="item cubes"></div>
+          <div className="item cubes"></div>
+        </div> */}
     </div>
   );
 };

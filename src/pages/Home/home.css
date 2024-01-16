@@ -55,3 +55,9 @@
     transform: translateY(0);
   }
 }
+
+@media screen and (max-width: 768px) {
+  .home_right {
+    display: none;
+  }
+}

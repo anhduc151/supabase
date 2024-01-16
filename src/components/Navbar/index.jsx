@@ -58,16 +58,37 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="nav_icon" onClick={toggleNav}>
+        {/* <div className="nav_icon" onClick={toggleNav}>
           {isNavOpen ? (
             <i className="bx bx-x"></i>
           ) : (
             <i className="bx bx-menu"></i>
           )}
+        </div> */}
+
+        <div className="nav_icon">
+          <input
+            type="checkbox"
+            id="checkbox"
+            checked={isNavOpen}
+            onChange={toggleNav}
+          />
+          <label htmlFor="checkbox" className="toggle">
+            <div className="bars" id="bar1"></div>
+            <div className="bars" id="bar2"></div>
+            <div className="bars" id="bar3"></div>
+          </label>
         </div>
       </div>
 
       <ul className={`nav_links ${isNavOpen ? "nav_links_open" : ""}`}>
+        <Link to="/" className="link">
+          {" "}
+          <li className={`nav_links_li ${activePage === "/" ? "active" : ""}`}>
+            Home
+          </li>
+        </Link>
+
         <Link to="/about" className="link">
           {" "}
           <li
