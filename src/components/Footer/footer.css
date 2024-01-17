@@ -1,0 +1,51 @@
+/* css footer */
+.footer {
+  background-image: url("../../assets/footer_bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 50px 2%;
+  height: 50vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-items: center;
+}
+
+.footer_box {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  bottom: -65px;
+  flex-direction: column;
+}
+
+.footer_p:hover {
+  cursor: pointer;
+  filter: drop-shadow(12px 12px 7px rgba(193, 5, 105, 0.7));
+}
+
+.footer_box_h4 {
+  font-size: 19px;
+}
+
+@media screen and (max-width: 768px) {
+  /* .footer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 30px;
+    justify-content: flex-start;
+    align-items: flex-start;
+  } */
+
+  .footer {
+    display: grid;
+    padding: 6%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    height: 100%;
+  }
+
+  .footer_box {
+    position: static;
+  }
+}

@@ -4,7 +4,6 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
 import { supabase } from "../../lib/helper/supabaseClient";
 import githubimg from "../../assets/github_icons.png";
-// import { supabase } from "../../lib/helper/supabaseClient";
 
 const SignIn = () => {
   const onFinish = (values) => {
