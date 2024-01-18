@@ -42,24 +42,24 @@ const Todo = () => {
   //   }
   // }
 
-async function handleDelete(id) {
-  console.log(id)
-  try {
-    const { data, error } = await supabase
-      .from("foody")
-      .delete()
-      .eq("id", id);
+  async function handleDelete(id) {
+    console.log(id);
+    try {
+      const { data, error } = await supabase
+        .from("foody")
+        .delete()
+        .eq("id", id);
 
-    if (error) {
+      if (error) {
+        console.error("Error deleting post:", error.message);
+      } else {
+        console.log("Post deleted successfully");
+        fetchPosts();
+      }
+    } catch (error) {
       console.error("Error deleting post:", error.message);
-    } else {
-      console.log("Post deleted successfully");
-      fetchPosts(); 
     }
-  } catch (error) {
-    console.error("Error deleting post:", error.message);
   }
-}
 
   useEffect(() => {
     fetchPosts();
@@ -103,7 +103,12 @@ async function handleDelete(id) {
               className="create_result_p"
             />
             {/* <button className="create_add">Add</button> */}
-            <button  onClick={() => handleDelete(product.id)}>Delete</button>
+            <button
+              onClick={() => handleDelete(product.id)}
+              className="create_delete"
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>

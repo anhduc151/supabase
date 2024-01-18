@@ -104,6 +104,19 @@
   background-image: linear-gradient(to right, #c9ff96, #29b4f5);
 }
 
+.create_delete {
+  background-color: red;
+  border-radius: 10px;
+  border: none;
+  padding: 5px 20px;
+  color: #fff;
+}
+
+.create_delete:hover {
+  cursor: pointer;
+  background-color: rgb(187, 24, 24);
+}
+
 @media screen and (max-width: 768px) {
   .create_show {
     display: grid;
