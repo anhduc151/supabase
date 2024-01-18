@@ -4,9 +4,6 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background-image: url("../../assets/home.png");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .home_left {
@@ -17,7 +14,7 @@
 
 .home_left_h1 {
   font-size: 50px;
-  background-image: linear-gradient(to bottom, #ffe940, #f6416c);
+  background-image: linear-gradient(to bottom, #fca400, #f6416c);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -55,7 +52,7 @@
 /* css home_why */
 .home_why {
   display: flex;
-  padding: 0 10% 20px;
+  padding: 0 10% 6rem;
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -63,7 +60,7 @@
 }
 
 .home_why_h2 {
-  background-image: linear-gradient(to bottom, #fff6b7, #f6416c);
+  background-image: linear-gradient(to bottom, #f7bd1e, #e00b3d);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -141,6 +138,20 @@
   background-clip: text;
   -webkit-background-clip: text;
   filter: drop-shadow(12px 12px 7px rgba(86, 206, 206, 0.7));
+}
+
+.home_seller {
+  padding: 0 10% 20px;
+}
+
+.home_seller_h2 {
+  background-image: linear-gradient(to bottom, #f7bd1e, #e00b3d);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-size: 25px;
+  margin-bottom: 20px;
+  filter: drop-shadow(12px 12px 7px rgba(167, 162, 164, 0.7));
 }
 
 @keyframes moveUpDown {

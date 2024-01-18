@@ -1,6 +1,7 @@
 import React from "react";
 import "./home.css";
 import homebg from "../../assets/home_bg.png";
+import ProductShow from "../../components/Product-Show";
 
 const Home = () => {
   return (
@@ -50,6 +51,13 @@ const Home = () => {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="home_seller">
+        <h2 className="home_seller_h2">
+          <i className="bx bx-stats title_icons"></i> Best Seller Product
+        </h2>
+        <ProductShow />
       </div>
     </>
   );
