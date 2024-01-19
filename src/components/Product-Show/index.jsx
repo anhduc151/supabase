@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../lib/helper/supabaseClient";
-import product from "../../assets/product.png";
 
 const ProductShow = () => {
   const [posts, setPosts] = useState([]);

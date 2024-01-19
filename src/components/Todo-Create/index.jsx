@@ -1,13 +1,13 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../../lib/helper/supabaseClient";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const Todo = () => {
   const [posts, setPosts] = useState([]);
-  const [post, setPost] = useState({ title: "", content: "" });
+  const [post, setPost] = useState({ id: null, title: "", content: "" });
   const { title, content } = post;
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleQuillChange = (value) => {
     setPost({ ...post, content: value });
@@ -15,37 +15,75 @@ const Todo = () => {
 
   // fetch data
   async function fetchPosts() {
-    const { data, error } = await supabase.from("foody").select();
-    if (error) {
-      console.log("Error fetching posts");
-    } else {
-      console.log(data);
-      setPosts(data);
+    try {
+      const { data, error } = await supabase.from("foody").select();
+      if (error) {
+        console.error("Error fetching posts:", error.message);
+      } else {
+        setPosts(data);
+      }
+    } catch (error) {
+      console.error("Error fetching posts:", error.message);
     }
   }
 
-  // create post
-  async function createPost() {
-    await supabase.from("foody").insert([{ title, content }]).single();
-    setPost({ title: "", content: "" });
-    fetchPosts();
+  // create or update post
+  async function createOrUpdatePost() {
+    try {
+      if (isEditing) {
+        await supabase
+          .from("foody")
+          .update({ title, content })
+          .eq("id", post.id);
+      } else {
+        await supabase.from("foody").insert([{ title, content }]);
+      }
+
+      resetForm();
+      fetchPosts();
+    } catch (error) {
+      console.error("Error creating/updating post:", error.message);
+    }
+  }
+
+  // edit post
+  const handleEdit = (id) => {
+    const postToEdit = posts.find((p) => p.id === id);
+    setPost({ id, title: postToEdit.title, content: postToEdit.content });
+    setIsEditing(true);
+  };
+
+  // reset form
+  const resetForm = () => {
+    setPost({ id: null, title: "", content: "" });
+    setIsEditing(false);
+  };
+
+  // update post
+  async function handleUpdate(id) {
+    try {
+      const { error } = await supabase
+        .from("foody")
+        .update({ title, content })
+        .eq("id", id)
+        // .select();
+
+      if (error) {
+        console.error("Error updating post:", error.message);
+      } else {
+        console.log("Post updated successfully");
+        fetchPosts();
+      }
+    } catch (error) {
+      console.error("Error updating post:", error.message);
+    }
   }
 
   // delete post
-  // async function handleDelete(postId) {
-  //   console.log("Received postId:", postId);
-  //   try {
-  //     await supabase.from("foody").delete().eq("id", postId);
-  //     fetchPosts();
-  //   } catch (error) {
-  //     console.error("Error deleting post:", error.message);
-  //   }
-  // }
-
   async function handleDelete(id) {
     console.log(id);
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("foody")
         .delete()
         .eq("id", id);
@@ -83,14 +121,14 @@ const Todo = () => {
         </p>
         <ReactQuill
           theme="snow"
-          value={post.content}
+          value={content}
           onChange={handleQuillChange}
           className="quils"
           style={{ border: "2px solid #000", borderRadius: "10px" }}
         />
 
-        <button onClick={createPost} className="create_btn">
-          Create Post
+        <button onClick={createOrUpdatePost} className="create_btn">
+          {isEditing ? "Update Post" : "Create Post"}
         </button>
       </div>
 
@@ -102,13 +140,26 @@ const Todo = () => {
               dangerouslySetInnerHTML={{ __html: product.content }}
               className="create_result_p"
             />
-            {/* <button className="create_add">Add</button> */}
-            <button
-              onClick={() => handleDelete(product.id)}
-              className="create_delete"
-            >
-              Delete
-            </button>
+            <div className="create_group">
+              <button
+                onClick={() => {
+                  if (isEditing) {
+                    handleUpdate(product.id);
+                  } else {
+                    handleEdit(product.id);
+                  }
+                }}
+                className="create_edit"
+              >
+                {isEditing ? "Update" : "Edit"}
+              </button>
+              <button
+                onClick={() => handleDelete(product.id)}
+                className="create_delete"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>

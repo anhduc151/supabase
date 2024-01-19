@@ -108,6 +108,7 @@
   background-color: red;
   border-radius: 10px;
   border: none;
+  width: 80px;
   padding: 5px 20px;
   color: #fff;
 }
@@ -115,6 +116,27 @@
 .create_delete:hover {
   cursor: pointer;
   background-color: rgb(187, 24, 24);
+}
+
+.create_edit {
+  background-color: yellowgreen;
+  border-radius: 10px;
+  border: none;
+  width: 80px;
+  padding: 5px 20px;
+  color: #fff;
+}
+
+.create_group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.create_edit:hover {
+  cursor: pointer;
+  background-color: #79ee0c;
 }
 
 @media screen and (max-width: 768px) {
